@@ -383,7 +383,7 @@ function getFileExtension(fileName) {
 }
 
 function splitFileName(fileName) {
-  const reNameExtCompress = /^([\w-]+)(?:(\.pdb|\.cif|\.mmtf|\.ccp4|\.dsn6|\.map))\.?(?:(gz))?$/i;
+  const reNameExtCompress = /^([\w-]+)(?:(\.pdb|\.cif|\.mmtf|\.ccp4|\.dsn6|\.xyz|\.map))\.?(?:(gz))?$/i;
   const matchName = reNameExtCompress.exec(fileName);
   return [matchName[1], matchName[2], matchName[3] || ''];
 }

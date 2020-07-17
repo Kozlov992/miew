@@ -5,3 +5,4 @@ coverage/
 .sonar/
 .idea/workspace.xml
 .idea/tasks.xml
+packages/lib/src/utils.js
