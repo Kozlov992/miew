@@ -5,13 +5,7 @@ const IDENT = '      ';
 const SMALL_IDENT = '  ';
 
 function complexIdentifier(compound) {
-  if (compound.metadata.id !== undefined) {
-    return compound.metadata.id;
-  }
-  if (compound.metadata.name !== undefined) {
-    return compound.metadata.name;
-  }
-  return 'Unknown';
+  return compound.metadata.id || compound.metadata.name || 'Unknown';
 }
 
 export default class XYZExporter extends Exporter {
