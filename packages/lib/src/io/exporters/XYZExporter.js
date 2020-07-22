@@ -15,9 +15,9 @@ export default class XYZExporter extends Exporter {
     const result = [numOfAtoms, complexIdentifier(source)];
     const atoms = this._source._atoms;
     for (let i = 0; i < numOfAtoms; i++) {
-      const curAtomName = atoms[i].element.name;
+      const curAtomName = atoms[i].element.name.padEnd(6);
       const curAtomPosition = atoms[i].position;
-      const curAtomPositionX = curAtomPosition.x.toFixed(3).padStart(13);
+      const curAtomPositionX = curAtomPosition.x.toFixed(3).padStart(8);
       const curAtomPositionY = curAtomPosition.y.toFixed(3).padStart(8);
       const curAtomPositionZ = curAtomPosition.z.toFixed(3).padStart(8);
       result.push(`${curAtomName}${curAtomPositionX}${curAtomPositionY}${curAtomPositionZ}`);
