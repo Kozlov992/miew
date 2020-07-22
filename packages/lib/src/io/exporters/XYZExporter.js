@@ -1,36 +1,27 @@
 import Exporter from './Exporter';
 import Complex from '../../chem/Complex';
 
-const IDENT = '      ';
-const SMALL_IDENT = '  ';
-
 function complexIdentifier(compound) {
   return compound.metadata.id || compound.metadata.name || 'Unknown';
 }
 
 export default class XYZExporter extends Exporter {
   exportSync() {
-    if (!this._source) {
-      return this._result;
+    const source = this._source;
+    if (!source) {
+      return null;
     }
-    const result = [];
-    const numOfAtoms = this._source._atoms.length;
-    result.push(numOfAtoms);
-    const compoundId = complexIdentifier(this._source);
-    result.push(compoundId);
-    let curStr = '';
+    const numOfAtoms = source._atoms.length;
+    const result = [numOfAtoms, complexIdentifier(source)];
     const atoms = this._source._atoms;
     for (let i = 0; i < numOfAtoms; i++) {
-      curStr = atoms[i].element.name + IDENT;
-      curStr += atoms[i].position.x.toFixed(3);
-      curStr += SMALL_IDENT;
-      curStr += atoms[i].position.y.toFixed(3);
-      curStr += SMALL_IDENT;
-      curStr += atoms[i].position.z.toFixed(3);
-      result.push(curStr);
+      const curAtomName = atoms[i].element.name;
+      const curAtomPositionX = atoms[i].position.x.toFixed(3).padStart(8);
+      const curAtomPositionY = atoms[i].position.y.toFixed(3).padStart(8);
+      const curAtomPositionZ = atoms[i].position.z.toFixed(3).padStart(8);
+      result.push(`${curAtomName}${curAtomPositionX}${curAtomPositionY}${curAtomPositionZ}`);
     }
-    this._result = `${result.join('\n')}\n`;
-    return this._result;
+    return `${result.join('\n')}\n`;
   }
 }
 
